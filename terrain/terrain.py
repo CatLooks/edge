@@ -1,8 +1,8 @@
 from threading import Thread
 from tkinter.messagebox import *
-from tkinter.simpledialog import *
 from tkinter.filedialog import *
 from tkinter import *
+from sys import argv
 import pygame as py
 
 py.init()
@@ -99,15 +99,23 @@ class Level:
 
 	@classmethod
 	def open(cls):
-		print("Open:")
-		path = input("> ").strip()
+		print("======== Open ========")
+		path = input("File: ").strip()
 
 		if path == "":
 			return
 
-		with open(path, "rb") as f:
-			file = f.read()
+		try:
+			with open(path, "rb") as f:
+				file = f.read()
+		except:
+			showerror("Error", "Failed to open file")
+			return
 
+		cls.openFile(file)
+
+	@classmethod
+	def openFile(cls, file):
 		if len(file) < 6:
 			showerror("Error", "Invalid Terrain Sum File")
 			return
@@ -137,12 +145,12 @@ class Level:
 
 	@classmethod
 	def save(cls):
-		print("Save:")
-		path = input("> ").strip()
+		print("======== Save ========")
+		path = input("File: ").strip()
 		if path == "":
 			return
 
-		name = input("> ").strip()
+		name = input("Prefix: ").strip()
 		if name == "":
 			return
 
@@ -281,6 +289,14 @@ class PyWindow:
 		self.tkw = TkWindow()
 		self.running = True
 
+	def load(self, path):
+		try:
+			with open(path, "rb") as f:
+				file = f.read()
+			Level.openFile(file)
+		except:
+			showerror("Error", "Failed to open file")
+
 	def loop(self):
 		pos = [0, 0]
 		z = 0
@@ -357,4 +373,7 @@ class PyWindow:
 		self.tkw.loop()
 
 w = PyWindow()
+
+if len(argv) > 1:
+	w.load(argv[1])
 w.run()
