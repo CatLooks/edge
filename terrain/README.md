@@ -1,5 +1,6 @@
 # Info
 Terrain Editor is a program for easy editing of EDGE level terrain.
+This program requires Python 3 and custom library `pygame`.
 
 # Control
 There're 2 windows:
