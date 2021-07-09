@@ -1,0 +1,1577 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="icon" href="icon.png">
+		<title>EDGE Level Documentation</title>
+		<style type="text/css">
+			body {
+				background-color: #35363A;
+				color: #FFFFFF;
+				font-family: monospace;
+				font-size: 16px;
+			}
+			table#data {
+				background-color: #202124;
+				border-collapse: collapse;
+			}
+			table#show-table {
+				background-color: #202124;
+				border-collapse: collapse;
+				position: absolute;
+				right: 30px;
+				border: 5px solid #40403E;
+			}
+			td, th {
+				border: 2px solid #40403E;
+				text-align: left;
+				padding: 8px;
+			}
+			pre {
+				background-color: #303841;
+				border: 1px solid #40403E;
+				color: #D8DEE9;
+				padding: 8px;
+			}
+			a, #lnk {
+				color: #FFF040;
+				cursor: pointer;
+			}
+			h1 {
+				text-align: center;
+			}
+			h2 {
+				padding-left: 24px;
+			}
+			code {
+				background-color: #303841;
+				border: 1px solid #40403E;
+				color: #D8DEE9;
+				padding: 2px;
+			}
+			#key {
+				color: #EC6066;
+			}
+			#sym {
+				color: #60B4B4;
+			}
+			#arg {
+				color: #C695C6;
+			}
+			#str {
+				color: #99C794;
+			}
+			#com {
+				color: #A6ACB9;
+			}
+			#lit {
+				color: #F9AE57;
+			}
+			#mnt {
+				color: #C695C6;
+			}
+			#content-table {
+				background-color: #202124;
+				border: 4px solid #40403E;
+				border-collapse: collapse;
+			}
+			#upb {
+				display: block;
+				position: fixed;
+				bottom: 20px;
+				right: 30px;
+				z-index: 99;
+				border: none;
+				outline: none;
+				background-color: #202124;
+				color: white;
+				cursor: pointer;
+				padding: 15px;
+				border-radius: 4px;
+				border: 3px solid #EC6066;
+			}
+
+			#ubp:hover {
+				background-color: #303134;
+			}
+			#show-div {
+				position: absolute;
+				right: 30px;
+				border: 5px solid #40403E;
+				background-color: #202124;
+			}
+			#show-img {
+				width: 100px;
+			}
+			#show-td {
+				padding-left: 5px;
+				padding-right: 5px;
+				padding-top: 5px;
+				padding-bottom: 2px;
+				text-align: center;
+			}
+			#music-text {
+				color: #99C794;
+			}
+			#music-play {
+				position: absolute;
+				left: 720px;
+			}
+			#ptr {
+				cursor: pointer;
+			}
+			#switch-text {
+				position: absolute;
+				left: 80px;
+				top: 628px;
+			}
+			.switch {
+				position: relative;
+				display: inline-block;
+				width: 60px;
+				height: 34px;
+				margin-top: 8px;
+			}
+			.switch input { 
+				opacity: 0;
+				width: 0;
+				height: 0;
+			}
+			.slider {
+				position: absolute;
+				cursor: pointer;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-color: #60615C;
+				-webkit-transition: .4s;
+				transition: .4s;
+			}
+			.slider:before {
+				position: absolute;
+				content: "";
+				height: 26px;
+				width: 26px;
+				left: 4px;
+				bottom: 4px;
+				background-color: #E0E0E0;
+				-webkit-transition: .4s;
+				transition: .4s;
+			}
+			input:checked + .slider {
+				background-color: #EC6066;
+			}
+			input:focus + .slider {
+				box-shadow: 0 0 1px #EC6066;
+			}
+			input:checked + .slider:before {
+				-webkit-transform: translateX(26px);
+				-ms-transform: translateX(26px);
+				transform: translateX(26px);
+			}
+			.slider.round {
+				border-radius: 34px;
+			}
+			.slider.round:before {
+				border-radius: 50%;
+			}
+		</style>
+	</head>
+	<body>
+	<div id="mark">
+		<h1>EDGE Level Documentation</h1>
+		<div id="content-table">
+			<h2>Table of contents</h2>
+			<ul>
+				<li><span onclick="goto('def-dict');" id="lnk" title="Term Dictionary">Used Terms</span></li>
+				<li><span onclick="goto('type-table');" id="lnk" title="Data types table">Types Table</span></li>
+				<li><span onclick="goto('coord-system');" id="lnk" title="Level coordinate system">Coordinate System</span></li>
+				<li><span onclick="goto('dynamic-parts');" id="lnk" title="Level dynamic part">Dynamic Part</span><ul>
+					<li><span onclick="goto('tag-level');" id="lnk" title="Level">Level</span><ul>
+						<li><span onclick="goto('tag-mp');" id="lnk" title="Moving platforms">Moving Platforms</span><ul>
+							<li><span onclick="goto('tag-wp');" id="lnk" title="Waypoints">Waypoints</span></li>
+						</ul></li>
+						<li><span onclick="goto('tag-btn');" id="lnk" title="Buttons">Buttons</span></li>
+						<li><span onclick="goto('tag-fp');" id="lnk" title="Falling platforms">Falling Platforms</span></li>
+						<li><span onclick="goto('tag-bmp');" id="lnk" title="Bumpers">Bumpers</span><ul>
+							<li><span onclick="goto('tag-dt');" id="lnk" title="Bumper directions">Bumper directions</span></li>
+						</ul></li>
+						<li><span onclick="goto('tag-rgs');" id="lnk" title="Resizers">Resizers</span></li>
+						<li><span onclick="goto('tag-psm');" id="lnk" title="Prisms">Prisms</span></li>
+						<li><span onclick="goto('tag-cp');" id="lnk" title="Checkpoints">Checkpoints</span></li>
+						<li><span onclick="goto('tag-ct');" id="lnk" title="Camera Triggers">Camera Triggers</span></li>
+						<li><span onclick="goto('tag-bs');" id="lnk" title="Button Sequences">Button Sequences</span></li>
+						<li><span onclick="goto('tag-odc');" id="lnk" title="Other Cubes">Other Cubes</span><ul>
+							<li><span onclick="goto('tag-ke');" id="lnk" title="Key Events">Key Events</span></li>
+						</ul></li>
+					</ul></li>
+				</ul></li>
+				<li><span onclick="goto('static-parts');" id="lnk" title="Level static part">Static Part</span><ul>
+					<li><span onclick="goto('map-color');" id="lnk" title="Level block modes">Block Modes</span></li>
+				</ul></li>
+				<li><span onclick="goto('music');" id="lnk" title="EDGE Soundtrack">Music List</span></li>
+				<li><span onclick="goto('mod-format');" id="lnk" title="EDGE Mod file format">EDGEMod Formating</span><ul>
+					<li><span onclick="goto('tag-mod');" id="lnk" title="Mod">Mod</span></li>
+					<li><span onclick="goto('sfx-fld');" id="lnk" title="SFX folder">SFX Folder</span></li>
+				</ul></li>
+			</ul>
+		</div>
+		<label class="switch">
+			<input type="checkbox" id="smooth-link" checked>
+			<span class="slider round"></span>
+		</label>
+		<p id="switch-text">Smooth link transitions</p>
+		<hr><div id="def-dict">
+			<h2>Used Terms</h2>
+			<p><a href="https://en.wikipedia.org/wiki/XML" target="_blank" title="Wiki article about XML">XML File</a> - file written in Extended Markup Language. Consists of tags that can have several parameters and can contain a list of nested tags.</p>
+			<pre><span id="com">&lt;!--This is an example XML file, also this is a comment--&gt;</span>
+&lt;<span id="key">TagList</span> <span id="arg">Param1</span>="<span id="str">Value1</span>" <span id="arg">Param2</span>="<span id="str">Value2</span>"&gt;
+    &lt;<span id="key">Nested1</span>/&gt;
+    &lt;<span id="key">Nested2</span>/&gt;
+&lt;/<span id="key">TagList</span>&gt;
+&lt;<span id="key">NoList</span> <span id="arg">Param3</span>="<span id="str">Value3</span>"/&gt;</pre>
+			<p><a href="https://en.wikipedia.org/wiki/Portable_Network_Graphics" target="_blank" title="Wiki article about PNG">PNG File</a> - image file supported by most image editors.</p>
+			<p>Tick - 1 / 22 of a second. Used for timing in EDGE.</p>
+			<p>Compiled Feature - a shortcut for more efficient code constructed from basic elements. Upon compilation becomes a common element<span id="sym">.</span></p>
+		</div>
+		<hr><div id="type-table">
+			<h2>Types Table</h2>
+			<p>A table for all types of parameters used for editing levels:</p>
+			<table id="data">
+				<tr>
+					<th>Name</th>
+					<th>Values & Limits</th>
+					<th>Example</th>
+				</tr>
+				<tr>
+					<td id="key">int</td>
+					<td><span id="lit">-2147483648</span> to <span id="lit">2147483647</span></td>
+					<td id="lit">556</td>
+				</tr>
+				<tr>
+					<td id="key">short</td>
+					<td><span id="lit">-32768</span> to <span id="lit">32767</span></td>
+					<td id="lit">-62</td>
+				</tr>
+				<tr>
+					<td id="key">word</td>
+					<td><span id="lit">0</span> to <span id="lit">65535</span></td>
+					<td id="lit">256</td>
+				</tr>
+				<tr>
+					<td id="key">byte</td>
+					<td><span id="lit">0</span> to <span id="lit">255</span></td>
+					<td id="lit">60</td>
+				</tr>
+				<tr>
+					<td id="key">bool</td>
+					<td>True / False</td>
+					<td>True</td>
+				</tr>
+				<tr>
+					<td id="key">nullbool</td>
+					<td>True / False / Null</td>
+					<td>Null</td>
+				</tr>
+				<tr>
+					<td id="key">volume</td>
+					<td><span id="key">word</span> <span id="sym">x</span> <span id="key">word</span> <span id="sym">x</span> <span id="key">byte</span></td>
+					<td><span id="lit">15</span><span id="sym">x</span><span id="lit">24</span><span id="sym">x</span><span id="lit">7</span></td>
+				</tr>
+				<tr>
+					<td id="key">2d vector (v2d)</td>
+					<td><span id="key">byte</span>, <span id="key">byte</span></td>
+					<td><span id="lit">1</span>,<span id="lit">0</span></td>
+				</tr>
+				<tr>
+					<td id="key">3d vector (v3d)</td>
+					<td><span id="key">word</span>, <span id="key">word</span>, <span id="key">word</span></td>
+					<td><span id="lit">6</span>,<span id="lit">900</span>,<span id="lit">5</span></td>
+				</tr>
+				<tr>
+					<td id="key">ID</td>
+					<td>text without (,)<br>template: word + index</td>
+					<td>Button5</td>
+				</tr>
+				<tr>
+					<td id="key">ID with data</td>
+					<td><span id="key">ID</span>(<span id="key">word</span>), default for <span id="key">word</span> is <span id="lit">0</span></td>
+					<td>Platform2(<span id="lit">5</span>)</td>
+				</tr>
+				<tr>
+					<td id="key">text</td>
+					<td>any text</td>
+					<td id="str">2nd contact</td>
+				</tr>
+				<tr>
+					<td id="key">&lt;type&gt; list</td>
+					<td>&lt;<span id="key">type</span>&gt;, &lt;<span id="key">type</span>&gt;, &lt;<span id="key">type</span>&gt;...</td>
+					<td>ID1, ID2, ID3</td>
+				</tr>
+				<tr>
+					<td id="key">version</td>
+					<td>2 - 4 numbers separated with <code>.</code></td>
+					<td>1.20.5</td>
+				</tr>
+				<tr>
+					<td id="key">version interval</td>
+					<td>2 4 number versions separated with <code>,</code></td>
+					<td>1.0.123.1, 1.0.246.2</td>
+				</tr>
+				<tr>
+					<td id="key">special</td>
+					<td>will be mentioned when used</td>
+					<td>StayDown</td>
+				</tr>	
+			</table>
+		</div>
+		<hr><div id="coord-system">
+			<h2>Coordinate System</h2>
+			<p>The coord system in EDGE uses <code>Z</code> axis for height, instead of usual <code>Y</code> axis.</p>
+			<img src="images/coords.png"/>
+		</div>
+		<hr><div id="dynamic-parts">
+			<h2>Dynamic level parts</h2>
+			<p>Dynamic part of the level is stored in the XML file.</p>
+			<p>Format:</p><pre>File: <span id="str">name</span>.xml</pre>
+			<div id="tag-level">
+				<h2>Level</h2>
+				<p>Level is a root tag of XML file.</p>
+				<p>It contains all dynamic elements of the level.</p>
+				<p>Parameters:</p>
+				<table id="data">
+					<tr>
+						<th>Name</th>
+						<th>Required</th>
+						<th>Type</th>
+						<th>Default</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>ID</td>
+						<td id="lit">Yes</td>
+						<td id="key">int</td>
+						<td>-</td>
+						<td>ID of the level. Should be different for each level</td>
+					</tr>
+					<tr>
+						<td>Size</td>
+						<td id="lit">Yes</td>
+						<td id="key">volume</td>
+						<td>-</td>
+						<td>Size of the level. Each number must be a positive integer</td>
+					</tr>
+					<tr>
+						<td>SpawnPoint</td>
+						<td id="lit">Yes</td>
+						<td id="key">v3d</td>
+						<td>-</td>
+						<td>Player spawn position</td>
+					</tr>
+					<tr>
+						<td>ExitPoint</td>
+						<td id="lit">Yes</td>
+						<td id="key">v3d</td>
+						<td>-</td>
+						<td>Exit portal position</td>
+					</tr>
+					<tr>
+						<td>Name</td>
+						<td id="lit">No</td>
+						<td id="key">text</td>
+						<td></td>
+						<td>Name of the level</td>
+					</tr>
+					<tr>
+						<td>TimeThresholds</td>
+						<td id="lit">No</td>
+						<td id="key">word list(<span id="lit">5</span>)</td>
+						<td id="lit">1,2,3,4,5</td>
+						<td>Time required for S+, S, A, B & C rank. Numbers must strictly increase</td>
+					</tr>
+					<tr>
+						<td>Theme</td>
+						<td id="lit">No</td>
+						<td id="key">byte (0 - 3)</td>
+						<td id="lit">0</td>
+						<td>Theme of the level. If out of range then the theme will become 0 (<span onclick="goto('link-theme');" id="lnk" title="Preview of default level themes">level themes</span>)</td>
+					</tr>
+					<tr>
+						<td>ModelTheme</td>
+						<td id="lit">No</td>
+						<td id="key">byte (0 - 3)</td>
+						<td><code>Level.Theme</code></td>
+						<td>Theme of the models in a level. If out of range then the models will be invisible (<span onclick="goto('link-theme');" id="lnk" title="Preview of default level themes">level themes</span>)</td>
+					</tr>
+					<tr>
+						<td>Music</td>
+						<td id="lit">No</td>
+						<td id="key">byte (0 - 24)</td>
+						<td id="lit">6</td>
+						<td>Music ID of the level song. If out of range then the music will become 6 (<span onclick="goto('music');" id="lnk" title="Preview of EDGE soundtrack">level music</span>)</td>
+					</tr>
+					<tr>
+						<td>MusicJava</td>
+						<td id="lit">No</td>
+						<td id="key">bytes (0 - 11)</td>
+						<td id="lit">0</td>
+						<td>Music ID for the Java version. If out of range then the music will become 0 (<span onclick="goto('music');" id="lnk" title="Preview of EDGE soundtrack">level music</span>)</td>
+					</tr>
+					<tr>
+						<td>Zoom</td>
+						<td id="lit">No</td>
+						<td id="key">short (1 - 6)</td>
+						<td id="lit">-1</td>
+						<td>Initial zoom of the level. If out of range then zoom will become 1</td>
+					</tr>
+					<tr>
+						<td>Angle</td>
+						<td id="lit">No</td>
+						<td id="key">short</td>
+						<td id="lit">22</td>
+						<td>Initial angle of the level camera</td>
+					</tr>
+					<tr>
+						<td>FieldOfView</td>
+						<td id="lit">No</td>
+						<td id="key">short</td>
+						<td id="lit">0</td>
+						<td>Initial FOV of the level</td>
+					</tr>
+				</table>
+
+				<hr><div id="tag-mp">
+					<h2>Moving Platform</h2>
+					<img src="images/mp.png" id="show-div" style="width:100px;"/>
+					<p>Moving Platforms are controllable <b id="mnt">platforms</b> in the level.</p>
+					<p>They spawn a block under the target position so player at the same position will stand on this <b id="mnt">platform</b>.</p>
+					<p>Parameters:</p>
+					<table id="data">
+						<tr>
+							<th>Name</th>
+							<th>Required</th>
+							<th>Type</th>
+							<th>Default</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>ID</td>
+							<td id="lit">No</td>
+							<td id="key">ID</td>
+							<td id="lit">-</td>
+							<td>ID for referencing the <b id="mnt">platform</b></td>
+						</tr>
+						<tr>
+							<td>AutoStart</td>
+							<td id="lit">No</td>
+							<td id="key">bool</td>
+							<td id="lit">True</td>
+							<td>Defines whether the <b id="mnt">platform</b> will start moving immediately after level start</td>
+						</tr>
+						<tr>
+							<td>LoopStartIndex</td>
+							<td id="lit">No</td>
+							<td id="key">byte</td>
+							<td id="lit">1</td>
+							<td>Define to which <b id="mnt">waypoint</b> loop back after completing whole <b id="mnt">waypoint list</b>.<br><br>
+								If <code>LoopStartIndex <span id="com">==</span> <span id="lit">0</span></code> then <b id="mnt">platform</b> will stop indefinitely</td>
+						</tr>
+						<tr>
+							<td>FullBlock</td>
+							<td id="lit">No</td>
+							<td id="key">bool</td>
+							<td id="lit">True</td>
+							<td>Define whether the <b id="mnt">platform</b> is a full block or a half block</td>
+						</tr>
+					</table>
+					<p>If the <b id="mnt">platform</b> should be moving relatively to other platform, use these parameters:</p>
+					<table id="data">
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>RelatedTo</td>
+							<td id="key">ID</td>
+							<td>Specify the <b id="mnt">platform</b> that this one should follow <span id="ptr" title="Compiled Feature - a shortcut for more efficient code constructed from basic elements. Upon compilation becomes a common element.">(Compiled feature *)</span></td>
+						</tr>
+						<tr>
+							<td>Offset</td>
+							<td id="key">v3d</td>
+							<td>Define the offset from the refered <b id="mnt">platform</b> <span id="ptr" title="Compiled Feature - a shortcut for more efficient code constructed from basic elements. Upon compilation becomes a common element.">(Compiled feature *)</span></td>
+						</tr>
+					</table><hr>
+					<p>If the <b id="mnt">platform</b> should have unique path, define the path by nested <b id="mnt">waypoint list</b>:</p>
+					<div id="tag-wp">
+						<h2>Waypoints</h2>
+						<p>Waypoints are used to define the <b id="mnt">moving platform</b>'s path.</p>
+						<p>Parameters:</p>
+						<table id="data">
+							<tr>
+								<th>Name</th>
+								<th>Required</th>
+								<th>Type</th>
+								<th>Default</th>
+								<th>Description</th>
+							</tr>
+							<tr>
+								<td>Position</td>
+								<td id="lit">Yes</td>
+								<td id="key">v3d</td>
+								<td id="lit">-</td>
+								<td>Position of the <b id="mnt">waypoint</b></td>
+							</tr>
+							<tr>
+								<td>TravelTime</td>
+								<td id="lit">No</td>
+								<td id="key">word</td>
+								<td id="lit">0</td>
+								<td>Defines a time <span id="ptr" title="Tick - 1 / 22 of a second. Used for timing in EDGE.">(in ticks *)</span> how long the <b id="mnt">platform</b> should move from the previous <b id="mnt">waypoint</b>.<br>
+								Should be greater then <span id="lit">0</span> for most cases or else the <b id="mnt">platform</b> won't move</td>
+							</tr>
+							<tr>
+								<td>PauseTime</td>
+								<td id="lit">No</td>
+								<td id="key">word</td>
+								<td id="lit">0</td>
+								<td>Defines a time <span id="ptr" title="Tick - 1 / 22 of a second. Used for timing in EDGE.">(in ticks *)</span> how long the <b id="mnt">platform</b> should wait after reaching current <b id="mnt">waypoint</b></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<hr><div id="tag-btn">
+					<h2>Buttons</h2>
+					<table id="show-table">
+						<tr>
+							<td id="show-td">Common<br>Button</td>
+							<td id="show-td"><img src="images/btn.png" style="width:100px;"/></td>
+						</tr>
+						<tr>
+							<td id="show-td">Null<br>Button</td>
+							<td id="show-td"><img src="images/alpha-btn.png" style="width:100px;"/></td>
+						</tr>
+					</table>
+					<p>Buttons are used to control various elements in the level.</p>
+					<p>Parameters:</p>
+					<table id="data">
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Default</th>
+							<th>Description</th>
+							<th>Valid in <span id="key">ButtonSequence</span></th>
+						</tr>
+						<tr>
+							<td>ID</td>
+							<td id="key">ID</td>
+							<td id="lit">-</td>
+							<td>ID for referencing to the <b id="mnt">button</b></td>
+							<td id="lit">Yes</td>
+						</tr>
+						<tr>
+							<td>Visible</td>
+							<td id="key">nullbool</td>
+							<td id="lit">True</td>
+							<td>Defines the visiblity of a <b id="mnt">button</b>.<br><br>
+								If <code>Visible <span id="com">==</span> Null</code> then the <b id="mnt">button</b> will be semi-transparent</td>
+							<td id="lit">Yes</td>
+						</tr>
+						<tr>
+							<td>Mode</td>
+							<td id="key">special</td>
+							<td>StayDown</td>
+							<td>Defines <b id="mnt">button</b> behavior (<span onclick="goto('btn-bhv')" title="Button modes">button modes</span>)</td>
+							<td id="lit">No</td>
+						</tr>
+						<tr>
+							<td>DisableCount</td>
+							<td id="key">byte</td>
+							<td id="lit">0</td>
+							<td>Defines how many times the <b id="mnt">button</b> can be pressed</td>
+							<td id="lit">No</td>
+						</tr>
+						<tr>
+							<td>TriggerAchievements</td>
+							<td id="key">ID with data list</td>
+							<td id="key">empty list</td>
+							<td>Defines the achievements to trigger upon pressing the <b id="mnt">button</b></td>
+							<td id="lit">No</td>
+						</tr>
+						<tr>
+							<td>AffectMovingPlatforms</td>
+							<td id="key">ID with data list</td>
+							<td id="key">empty list</td>
+							<td>Defines the <b id="mnt">platforms</b> to move upon pressing the <b id="mnt">button</b>.<br>
+								<span id="key">ID</span> data defines how many <b id="mnt">waypoints</b> to proceed</td>
+							<td id="lit">No</td>
+						</tr>
+						<tr>
+							<td>AffectButtons</td>
+							<td id="key">ID with data list</td>
+							<td id="key">empty list</td>
+							<td>Defines the <b id="mnt">buttons</b> to switch upon pressing the <b id="mnt">button</b>.<br>
+								If <span id="key">ID</span> data is <span id="lit">0</span> then the <b id="mnt">button</b> will be pressed upon starting level</td>
+							<td id="lit">No</td>
+						</tr>
+						<tr>
+							<td>AffectBumpers</td>
+							<td id="key">ID with data list</td>
+							<td id="key">empty list</td>
+							<td>Defines the <b id="mnt">bumpers</b> to switch upon pressing the <b id="mnt">button</b></td>
+							<td id="lit">No</td>
+						</tr>
+						<tr>
+							<th colspan="5"><span id="lit">1st</span> Positioning</th>
+						</tr>
+						<tr>
+							<td>Position</td>
+							<td id="key">v3d</td>
+							<td id="lit">0,0,0</td>
+							<td>Defines the <b id="mnt">button</b> position in the level</td>
+							<td id="lit">Yes</td>
+						</tr>
+						<tr>
+							<th colspan="5"><span id="lit">2nd</span> Positioning</th>
+						</tr>
+						<tr>
+							<td>MovingPlatformID</td>
+							<td id="key">ID</td>
+							<td id="lit">1st Positioning</td>
+							<td>Sticks the <b id="mnt">button</b> on the <b id="mnt">moving platform</b></td>
+							<td id="lit">Yes</td>
+						</tr>
+					</table>
+					<h3 style="padding-left:24px;" id="btn-bhv">Button behavior</h3>
+					<p>A <b id="mnt">button</b> can be at one of 3 modes:</p><ul>
+						<li>StayDown - upon pressing the <b id="mnt">button</b> the <b id="mnt">waypoints</b> will be proceeded and if <code>DisableCount <span id="com">==</span> <span id="lit">0</span></code> then the <b id="mnt">button</b> will stay pressed upon getting off</li>
+						<li>StayUp - acts the same as StayDown <b id="mnt">button</b> except can be pressed unlimited times</li>
+						<li>Toggle - acts the same as StayUp <b id="mnt">button</b> except upon getting off returns affected elements to their state before pressing the <b id="mnt">button</b></li>
+					</ul>
+				</div>
+				<hr><div id="tag-fp">
+					<h2>Falling Platforms</h2>
+					<img src="images/fp.png" id="show-div" style="width:100px;"/>
+					<p>Falling Platforms are <b id="mnt">platforms</b> that fill fall after some time after stepping on them.</p>
+					<p>They spawn a block under the target position so player at the same position will stand on this <b id="mnt">platform</b>.</p>
+					<p>Parameters:</p>
+					<table id="data">
+						<tr>
+							<th>Name</th>
+							<th>Required</th>
+							<th>Type</th>
+							<th>Default</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Position</td>
+							<td id="lit">Yes</td>
+							<td id="key">v3d</td>
+							<td>-</td>
+							<td>Position of the <b id="mnt">falling platform</b></td>
+						</tr>
+						<tr>
+							<td>FloatTime</td>
+							<td id="lit">No</td>
+							<td id="key">word</td>
+							<td>20</td>
+							<td>Defines how many time <span id="ptr" title="Tick - 1 / 22 of a second. Used for timing in EDGE.">(in ticks *)</span> the <b id="mnt">falling platform</b> will float after stepping on it</td>
+						</tr>
+					</table>
+				</div>
+				<hr><div id="tag-bmp">
+					<h2>Bumpers</h2>
+					<img src="images/bmp.png" id="show-div" style="width:100px;"/>
+					<p>Bumpers are blocks than bump cubes.</p>
+					<p>Parameters:</p>
+					<table id="data">
+						<tr>
+							<th>Name</th>
+							<th>Required</th>
+							<th>Type</th>
+							<th>Default</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Position</td>
+							<td id="lit">Yes</td>
+							<td id="key">v3d</td>
+							<td>-</td>
+							<td>Position of <b id="mnt">bumper</b> in the level</td>
+						</tr>
+						<tr>
+							<td>ID</td>
+							<td id="lit">No</td>
+							<td id="key">ID</td>
+							<td>-</td>
+							<td>ID for referencing the <b id="mnt">bumper</b></td>
+						</tr>
+						<tr>
+							<td>Enabled</td>
+							<td id="lit">No</td>
+							<td id="key">bool</td>
+							<td>True</td>
+							<td>Specifies whether the <b id="mnt">bumper</b> is enabled or not</td>
+						</tr>
+					</table><hr>
+					<p>To control <b id="mnt">bumper</b>'s direction we use the following tags:</p>
+					<div id="tag-dt">
+						<h2>Bumper Directions</h2>
+						<p><b id="key">North</b>, <b id="key">South</b>, <b id="key">West</b>, <b id="key">East</b> tags are used to define <b id="mnt">bumper</b>'s impulse direction.</p>
+						<p>Parameters:</p>
+						<table id="data">
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Default</th>
+								<th>Description</th>
+							</tr>
+							<tr>
+								<td>StartDelay</td>
+								<td id="key">short</td>
+								<td id="lit">0</td>
+								<td>Defines the delay <span id="ptr" title="Tick - 1 / 22 of a second. Used for timing in EDGE.">(in ticks *)</span> before the impulse start</td>
+							</tr>
+							<tr>
+								<td>PulseRate</td>
+								<td id="key">short</td>
+								<td id="lit">0</td>
+								<td>Defines the pause between each pulse <span id="ptr" title="Tick - 1 / 22 of a second. Used for timing in EDGE.">(in ticks *)</span></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<hr><div id="tag-rgs">
+					<h2>Resizers</h2>
+					<img src="images/resizer.png" id="show-div" style="width:100px;"/>
+					<p>Resizers change the player's size.</p>
+					<p>There're 2 types of resizers:</p>
+					<ul>
+						<li>ResizerGrow (changes player's size to normal)</li>
+						<li>ResizerShrink (changes player's size to small, 1 / 27 size of original)</li>
+					</ul>
+					<p>Parameters:</p>
+					<table id="data">
+						<tr>
+							<th>Name</th>
+							<th>Required</th>
+							<th>Type</th>
+							<th>Default</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Position</td>
+							<td id="lit">Yes</td>
+							<td id="key">v3d</td>
+							<td>-</td>
+							<td>Position of the <b id="mnt">resizer</b></td>
+						</tr>
+						<tr>
+							<td>Visible</td>
+							<td id="lit">No</td>
+							<td id="key">bool</td>
+							<td>True</td>
+							<td>Defines the visibility of the <b id="mnt">resizer</b></td>
+						</tr>
+						<tr>
+							<td>Radius</td>
+							<td id="lit">No</td>
+							<td id="key">v2d</td>
+							<td id="lit">0,0</td>
+							<td>Defines the expansion of the <b id="mnt">resizer</b> hitbox <span id="ptr" title="Compiled Feature - a shortcut for more efficient code constructed from basic elements. Upon compilation becomes a common element.">(Compiled feature *)</span></td>
+						</tr>
+					</table>
+				</div>
+				<hr><div id="tag-psm">
+					<h2>Prisms</h2>
+					<img src="images/prism.png" id="show-div" style="width:100px;"/>
+					<p>Prisms are used to boost player's speed.</p>
+					<p>Also it's required to collect all <b id="mnt">prisms</b> for S or S+ rank.</p>
+					<table id="data">
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Position</td>
+							<td id="key">v3d</td>
+							<td>Position of the <b id="rainbow">prism</b></td>
+						</tr>
+					</table>
+				</div>
+				<hr><div id="tag-cp">
+					<h2>Checkpoints</h2>
+					<p>Checkpoints are used to help player progress throught the level.</p>
+					<p>If you fall into the void or get crushed then you'll respawn on the latest checkpoint.</p>
+					<p>Parameters:</p>
+					<table id="data">
+						<tr>
+							<th>Name</th>
+							<th>Required</th>
+							<th>Type</th>
+							<th>Default</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Position</td>
+							<td id="lit">Yes</td>
+							<td id="key">v3d</td>
+							<td>-</td>
+							<td>Position of the <b id="mnt">checkpoint</b></td>
+						</tr>
+						<tr>
+							<td>RespawnZ</td>
+							<td id="lit">No</td>
+							<td id="key">short</td>
+							<td id="lit">0</td>
+							<td>Defines at what <code>Z</code> coordinate the player will respawn</td>
+						</tr>
+						<tr>
+							<td>Radius</td>
+							<td id="lit">No</td>
+							<td id="key">v2d</td>
+							<td id="lit">0,0</td>
+							<td>Defines the expansion of the <b id="mnt">checkpoint</b> hitbox</td>
+						</tr>
+					</table>
+				</div>
+				<hr><div id="tag-ct">
+					<h2>Camera Triggers</h2>
+					<p>Camera Triggers change the player viewpoint.</p>
+					<p>Parameters:</p>
+					<table id="data">
+						<tr>
+							<th>Name</th>
+							<th>Required</th>
+							<th>Type</th>
+							<th>Default</th>
+							<th>Description</th>
+							<th>Invalid with</th>
+							<th id="key">Advanced Camera Mode</th>
+						</tr>
+						<tr>
+							<td>Position</td>
+							<td id="lit">Yes</td>
+							<td id="key">v3d</td>
+							<td id="lit">-</td>
+							<td>Position of the trigger</td>
+							<td>-</td>
+							<td id="lit">No</td>
+						</tr>
+						<tr>
+							<td>Zoom</td>
+							<td id="lit">No</td>
+							<td id="key">short (1 - 6, -1)</td>
+							<td id="lit">-1</td>
+							<td>Sets camera zoom (6, 5, 1, 2, 3, 4, from closest to farthest).<br>
+								If the value is <span id="lit">-1</span> then triggers the <b id="mnt">advanced camera mode</b>.<br>
+								You must specify <b id="mnt">Duration</b> in <b id="mnt">advanced camera mode</b>.</td>
+							<td>Angle,FieldOfView</td>
+							<td id="lit">No</td>
+						</tr>
+						<tr>
+							<td>Angle</td>
+							<td id="lit">No</td>
+							<td id="key">short</td>
+							<td id="lit">22</td>
+							<td>Sets camera view angle</td>
+							<td>Zoom,FieldOfView</td>
+							<td id="lit">Yes</td>
+						</tr>
+						<tr>
+							<td>FieldOfView</td>
+							<td id="lit">No</td>
+							<td id="key">short</td>
+							<td id="lit">22</td>
+							<td>Sets camera FOV</td>
+							<td>Zoom,Angle</td>
+							<td id="lit">Yes</td>
+						</tr>
+						<tr>
+							<td>StartDelay</td>
+							<td id="lit">No</td>
+							<td id="key">word</td>
+							<td id="lit">0</td>
+							<td>Defines delay <span id="ptr" title="Tick - 1 / 22 of a second. Used for timing in EDGE.">(in ticks *)</span> before translating camera view</td>
+							<td>-</td>
+							<td id="lit">Yes</td>
+						</tr>
+						<tr>
+							<td>Duration</td>
+							<td id="lit">No</td>
+							<td id="key">word</td>
+							<td id="lit">0</td>
+							<td>Defines time <span id="ptr" title="Tick - 1 / 22 of a second. Used for timing in EDGE.">(in ticks *)</span> needed for translating camera view</td>
+							<td>-</td>
+							<td id="lit">Yes</td>
+						</tr>
+						<tr>
+							<td>SingleUse</td>
+							<td id="lit">No</td>
+							<td id="key">bool</td>
+							<td id="lit">False</td>
+							<td>Defines whether the trigger can be triggered once or multiple times</td>
+							<td>-</td>
+							<td id="lit">Yes</td>
+						</tr>
+					</table>
+				</div>
+				<hr><div id="tag-bs">
+					<h2>Button Sequences</h2>
+					<p>Button Sequences are used to group several <b id="mnt">buttons</b>.</p>
+					<p>Parameters:</p>
+					<table id="data">
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Default</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>SequenceInOrder</td>
+							<td id="key">bool</td>
+							<td id="lit">False</td>
+							<td>Defines whether the <b id="mnt">buttons</b> need to be pressed in order</td>
+						</tr>
+						<tr>
+							<td>TriggerAchievements</td>
+							<td id="key">ID with data list</td>
+							<td id="key">empty list</td>
+							<td>Defines the achievements to trigger upon pressing the <b id="mnt">button</b></td>
+						</tr>
+						<tr>
+							<td>AffectMovingPlatforms</td>
+							<td id="key">ID with data list</td>
+							<td id="key">empty list</td>
+							<td>Defines the <b id="mnt">platforms</b> to move upon pressing the <b id="mnt">button</b>.<br>
+								<span id="key">ID</span> data defines how many <b id="mnt">waypoints</b> to proceed</td>
+						</tr>
+						<tr>
+							<td>AffectButtons</td>
+							<td id="key">ID with data list</td>
+							<td id="key">empty list</td>
+							<td>Defines the <b id="mnt">buttons</b> to switch upon pressing the <b id="mnt">button</b>.<br>
+								If <span id="key">ID</span> data is <span id="lit">0</span> then the <b id="mnt">button</b> will be pressed upon starting level</td>
+						</tr>
+						<tr>
+							<td>AffectBumpers</td>
+							<td id="key">ID with data list</td>
+							<td id="key">empty list</td>
+							<td>Defines the <b id="mnt">bumpers</b> to switch upon pressing the <b id="mnt">button</b></td>
+						</tr>
+					</table>
+				</div>
+				<hr><div id="tag-odc">
+					<table id="show-table">
+						<tr>
+							<td id="show-td">Other<br>Cube</td>
+							<td id="show-td"><img src="images/quest.png" style="width:100px;"/></td>
+						</tr>
+						<tr>
+							<td id="show-td">Dark<br>Cube</td>
+							<td id="show-td"><img src="images/dc.png" style="width:100px;"/></td>
+						</tr>
+					</table>
+					<h2>Other Cubes</h2>
+					<p>Other Cubes are helping or hindering the player.</p>
+					<p>There're 2 types of other cubes:</p>
+					<ul>
+						<li>OtherCube - upon stepping on the question mark, the hologram appears as a hint how to pass a certain level part</li>
+						<li>DarkCube - dark cube that usually hinders the player from passing the level</li>
+					</ul>
+					<p>Parameters:</p>
+					<table id="data">
+						<tr>
+							<th>Name</th>
+							<th>Required</th>
+							<th>Type</th>
+							<th>Default</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>PositionTrigger</td>
+							<td id="lit">Yes</td>
+							<td id="key">v3d</td>
+							<td>-</td>
+							<td>Position of the <b id="mnt">cube</b> trigger</td>
+						</tr>
+						<tr>
+							<td>PositionCube</td>
+							<td id="lit">Yes</td>
+							<td id="key">v3d</td>
+							<td>-</td>
+							<td><b id="mnt">Cube</b> spawn position</td>
+						</tr>
+						<tr>
+							<td>MovingBlockSync</td>
+							<td id="lit">No</td>
+							<td id="key">ID</td>
+							<td>-</td>
+							<td>If defined, <b id="mnt">cube</b> will start moving when <b id="mnt">platform</b> reaches its <span id="lit">1st</span> <b id="mnt">waypoint</b>.</td>
+						</tr>
+						<tr>
+							<td>Radius</td>
+							<td id="lit">No</td>
+							<td id="key">v2d</td>
+							<td id="lit">0,0</td>
+							<td>Defines the expansion of the <b id="mnt">cube</b> trigger hitbox <span id="ptr" title="Compiled Feature - a shortcut for more efficient code constructed from basic elements. Upon compilation becomes a common element.">(Compiled feature *)</span></td>
+						</tr>
+					</table><hr>
+					<p>To control <b id="mnt">cube</b>, use the following tags:</p>
+					<div id="tag-ke">
+						<h2>Key Events</h2>
+						<p>Key Events are tags for controlling <b id="mnt">cubes</b>.</p>
+						<p>Tag format:</p>
+						<pre>Part <span id="lit">1</span>: <span id="key">North, South, West, East</span>
+Part <span id="lit">2</span>: <span id="key">Down, Up</span>
+Separator: <span id="key">None</span></pre>
+						<p>Tag Parameters:</p>
+						<table id="data">
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Default</th>
+								<th>Description</th>
+							</tr>
+							<tr>
+								<td>TimeOffset</td>
+								<td id="key">word</td>
+								<td id="lit">0</td>
+								<td>Defines the time offset <span id="ptr" title="Tick - 1 / 22 of a second. Used for timing in EDGE.">(in ticks *)</span> from <b id="mnt">cube</b> spawn when the key should be pressed / released</td>
+							</tr>
+						</table>
+						<p>The following table contains the time offsets for <b id="mnt">cube</b> to roll certain amount of blocks:</p>
+						<table id="data">
+							<tr>
+								<th>Blocks</th>
+								<th title="Tick - 1 / 22 of a second. Used for timing in EDGE." style="border-right: 4px solid #60615C;">Ticks</th>
+								<th>Blocks</th>
+								<th title="Tick - 1 / 22 of a second. Used for timing in EDGE." style="border-right: 4px solid #60615C;">Ticks</th>
+								<th>Blocks</th>
+								<th title="Tick - 1 / 22 of a second. Used for timing in EDGE." style="border-right: 4px solid #60615C;">Ticks</th>
+								<th>Blocks</th>
+								<th title="Tick - 1 / 22 of a second. Used for timing in EDGE.">Ticks</th>
+							</tr>
+							<tr>
+								<td id="lit">1</td>
+								<td id="lit" style="border-right: 4px solid #60615C;">8</td>
+								<td id="lit">6</td>
+								<td id="lit" style="border-right: 4px solid #60615C;">46</td>
+								<td id="lit">11</td>
+								<td id="lit" style="border-right: 4px solid #60615C;">81</td>
+								<td id="lit">16</td>
+								<td id="lit">111</td>
+							</tr>
+							<tr>
+								<td id="lit">2</td>
+								<td id="lit" style="border-right: 4px solid #60615C;">16</td>
+								<td id="lit">7</td>
+								<td id="lit" style="border-right: 4px solid #60615C;">53</td>
+								<td id="lit">12</td>
+								<td id="lit" style="border-right: 4px solid #60615C;">87</td>
+								<td id="lit">17</td>
+								<td id="lit">117</td>
+							</tr>
+							<tr>
+								<td id="lit">3</td>
+								<td id="lit" style="border-right: 4px solid #60615C;">24</td>
+								<td id="lit">8</td>
+								<td id="lit" style="border-right: 4px solid #60615C;">60</td>
+								<td id="lit">13</td>
+								<td id="lit" style="border-right: 4px solid #60615C;">93</td>
+								<td id="lit">18</td>
+								<td id="lit">123</td>
+							</tr>
+							<tr>
+								<td id="lit">4</td>
+								<td id="lit" style="border-right: 4px solid #60615C;">32</td>
+								<td id="lit">9</td>
+								<td id="lit" style="border-right: 4px solid #60615C;">67</td>
+								<td id="lit">14</td>
+								<td id="lit" style="border-right: 4px solid #60615C;">99</td>
+								<td id="lit">19</td>
+								<td id="lit">129</td>
+							</tr>
+							<tr>
+								<td id="lit">5</td>
+								<td id="lit" style="border-right: 4px solid #60615C;">39</td>
+								<td id="lit">10</td>
+								<td id="lit" style="border-right: 4px solid #60615C;">74</td>
+								<td id="lit">15</td>
+								<td id="lit" style="border-right: 4px solid #60615C;">105</td>
+								<td id="lit">20</td>
+								<td id="lit">135</td>
+							</tr>
+						</table>						
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr><div id="static-parts">
+			<h2>Static level parts</h2>
+			<p>Static part of the level is stored using PNG files.</p>
+			<p>Each PNG file represents a layer of static blocks.</p>
+			<p>Format:</p><pre>File: <span id="str">name.layer</span>.png
+Size: v2d(Level.Size)
+Layers: Level.Size.Z</pre></div>
+			
+			<hr><div id="map-color">
+				<h2>Block Modes</h2>
+				<p>Each pixel of each layer represents a single block.</p>
+				<p>Each color channel (RGB) stands for specific block property.</p>
+				<p>Standard values:</p>
+				<table id="data">
+					<tr>
+						<th>Block</th>
+						<th>RGB</th>
+						<th>Preview</th>
+						<th>Model</th>
+					</tr>
+					<tr>
+						<td>Full</td>
+						<td><span id="lit">#FFFFFF</span></td>
+						<td><svg width="64" height="24"><rect width="64" height="24" style="fill:rgb(255, 255, 255);"></rect></svg></td>
+						<td><img src="images/0.png" style="width:40px;"/></td>
+					</tr>
+					<tr>
+						<td>Half</td>
+						<td><span id="lit">#FFFF80</span></td>
+						<td><svg width="64" height="24"><rect width="64" height="24" style="fill:rgb(255, 255, 128);"></rect></svg></td>
+						<td><img src="images/half.png" style="width:40px;"/></td>
+					</tr>
+					<tr>
+						<td>Void</td>
+						<td><span id="lit">#000000</span></td>
+						<td><svg width="64" height="24"><rect width="64" height="24" style="fill:rgb(0, 0, 0);"></rect></svg></td>
+						<td><img src="images/void.png" style="width:40px;"/></td>
+					</tr>
+				</table>
+
+				<h3>R Channel</h3>
+				<p>R Channel affects block glowing.</p>
+				<table id="data">
+					<tr>
+						<th>R value</th>
+						<th>Result</th>
+					</tr>
+					<tr>
+						<td><span id="lit">0x00</span> - <span id="lit">0x7F</span></td>
+						<td>Block will generate its model but player can't collide with it</td>
+					</tr>
+					<tr>
+						<td><span id="lit">0x80</span> - <span id="lit">0x9F</span></td>
+						<td>Static semi-moving block</td>
+					</tr>
+					<tr>
+						<td><span id="lit">0xA0</span> - <span id="lit">0xBF</span></td>
+						<td>Static moving block</td>
+					</tr>
+					<tr>
+						<td><span id="lit">0xC0</span> - <span id="lit">0xDF</span></td>
+						<td>Static luminous semi-moving block</td>
+					</tr>
+					<tr>
+						<td><span id="lit">0xE0</span> - <span id="lit">0xFE</span></td>
+						<td>Static luminous moving block</td>
+					</tr>
+					<tr>
+						<td id="lit">0xFF</td>
+						<td>Common block</td>
+					</tr>
+				</table>
+
+				<h2 id="link-theme">G Channel</h2>
+				<p>G Channel affects block model texture.</p>
+				<table id="data">
+					<tr>
+						<th>G value</th>
+						<th>Result</th>
+						<th>Model</th>
+					</tr>
+					<tr>
+						<td><span id="lit">0x00</span> - <span id="lit">0x3F</span></td>
+						<td>Texture darker by 3</td>
+						<td><img src="images/3.png" style="width:40px;"/></td>
+					</tr>
+					<tr>
+						<td><span id="lit">0x40</span> - <span id="lit">0x7F</span></td>
+						<td>Texture darker by 2</td>
+						<td><img src="images/2.png" style="width:40px;"/></td>
+					</tr>
+					<tr>
+						<td><span id="lit">0x80</span> - <span id="lit">0xBF</span></td>
+						<td>Texture darker by 1</td>
+						<td><img src="images/1.png" style="width:40px;"/></td>
+					</tr>
+					<tr>
+						<td><span id="lit">0xC0</span> - <span id="lit">0xFF</span></td>
+						<td>Texture coresponds to <code>Level.ModelTheme</code></td>
+						<td><img src="images/0.png" style="width:40px;"/></td>
+					</tr>
+				</table>
+
+				<h2>B Channel</h2>
+				<p>B Channel affects block height.</p>
+				<p><span id="lit">0x00</span> = no block model, <span id="lit">0xFF</span> = full block model</p>
+				<p>Anything between will generate <code>Blue / <span id="lit">255</span></code> height model from the top side.</p>
+			</div>
+		<hr><div id="music">
+			<h2>Music</h2>
+			<p>Music is the track that will play while you are playing the level. There're currently <span id="lit">25</span> different tracks in the game.</p>
+			<p>In addition, you can specify the music for Java version, however it is not used in EDGE Extended.</p>
+			<p>Tracks <span id="str">04_Jingle</span> & <span id="str">14_Space</span> are unused, so they can be replaced by custom levels such as <span id="str">path of piracy</span>.</p>
+			<div id="music-play">
+				<p>Music: <b id="music-text">None</b></p>
+				<audio id="audio-player" controls>
+					<source src="" type="audio/ogg" id="music-player"/>
+					<b id="key">Your browser does not support audio playback.</b>
+				</audio>
+			</div>
+			<table id="data">
+				<tr>
+					<th id="key">ID</th>
+					<th>Music</th>
+					<th>Java Music</th>
+					<th id="key">ID</th>
+					<th>Music</th>
+				</tr>
+				<tr>
+					<td id="lit" onclick="play(0, 1);">00</td>
+					<td onclick="play(0, 1);">Title</td>
+					<td onclick="play(0, 0);">Menus</td>
+					<td id="lit" onclick="play(13, 1);">13</td>
+					<td onclick="play(13, 1);">Debrief (Level Finished)</td>
+				</tr>
+				<tr>
+					<td id="lit" onclick="play(1, 1);">01</td>
+					<td onclick="play(1, 1);">Eternity</td>
+					<td onclick="play(1, 0);">Braintonik</td>
+					<td id="lit" onclick="play(14, 1);">14</td>
+					<td onclick="play(14, 1);">Space (Unused)</td>
+				</tr>
+				<tr>
+					<td id="lit" onclick="play(2, 1);">02</td>
+					<td onclick="play(2, 1);">Quiet</td>
+					<td onclick="play(2, 0);">Cube Dance</td>
+					<td id="lit" onclick="play(15, 1);">15</td>
+					<td onclick="play(15, 1);">Voyage Geometrique</td>
+				</tr>
+				<tr>
+					<td id="lit" onclick="play(3, 1);">03</td>
+					<td onclick="play(3, 1);">Pad</td>
+					<td onclick="play(3, 0);">Essai <span id="lit">2</span></td>
+					<td id="lit" onclick="play(16, 1);">16</td>
+					<td onclick="play(16, 1);">M-Zone</td>
+				</tr>
+				<tr>
+					<td id="lit" onclick="play(4, 1);">04</td>
+					<td onclick="play(4, 1);">Jingle (Unused)</td>
+					<td onclick="play(4, 0);">Essai <span id="lit">1</span></td>
+					<td id="lit" onclick="play(17, 1);">17</td>
+					<td onclick="play(17, 1);">R2</td>
+				</tr>
+				<tr>
+					<td id="lit" onclick="play(5, 1);">05</td>
+					<td onclick="play(5, 1);">Tec</td>
+					<td onclick="play(5, 0);">Test</td>
+					<td id="lit" onclick="play(18, 1);">18</td>
+					<td onclick="play(18, 1);">Mystery Cube</td>
+				</tr>
+				<tr>
+					<td id="lit" onclick="play(6, 1);">06</td>
+					<td onclick="play(6, 1);">Kakkoi (Default)</td>
+					<td onclick="play(6, 0);">Mystery Cube</td>
+					<td id="lit" onclick="play(19, 1);">19</td>
+					<td onclick="play(19, 1);">Duty</td>
+				</tr>
+				<tr>
+					<td id="lit" onclick="play(7, 1);">07</td>
+					<td onclick="play(7, 1);">Dark</td>
+					<td onclick="play(7, 0);"><span id="lit">03</span> EDGE</td>
+					<td id="lit" onclick="play(20, 1);">20</td>
+					<td onclick="play(20, 1);">Perfect Cell</td>
+				</tr>
+				<tr>
+					<td id="lit" onclick="play(8, 1);">08</td>
+					<td onclick="play(8, 1);">Squadron</td>
+					<td onclick="play(8, 0);">Jungle</td>
+					<td id="lit" onclick="play(21, 1);">21</td>
+					<td onclick="play(21, 1);">Fun</td>
+				</tr>
+				<tr>
+					<td id="lit" onclick="play(9, 1);">09</td>
+					<td onclick="play(9, 1);"><span id="lit">8</span>-bits</td>
+					<td onclick="play(9, 0);">Retardtonic</td>
+					<td id="lit" onclick="play(22, 1);">22</td>
+					<td onclick="play(22, 1);">Lol</td>
+				</tr>
+				<tr>
+					<td id="lit" onclick="play(10, 1);">10</td>
+					<td onclick="play(10, 1);">Pixel</td>
+					<td onclick="play(10, 0);">Oldschool Simon (Duty)</td>
+					<td id="lit" onclick="play(23, 1);">23</td>
+					<td onclick="play(23, 1);">Lost Way</td>
+				</tr>
+				<tr>
+					<td id="lit" onclick="play(11, 1);">11</td>
+					<td onclick="play(11, 1);">Jupiter</td>
+					<td onclick="play(11, 0);">Planant</td>
+					<td id="lit" onclick="play(24, 1);">24</td>
+					<td onclick="play(24, 1);">Wall Street</td>
+				</tr>
+				<tr>
+					<td id="lit" onclick="play(12, 1);">12</td>
+					<td onclick="play(12, 1);">Shame</td>
+					<td colspan="3">-</td>
+				</tr>
+			</table>
+		</div>
+		<hr><div id="mod-format">
+			<h2>EDGE Mod Formatting</h2>
+			<p>EDGE Tool supports EDGE Mod files for sharing the levels.</p>
+			<p>Format:</p>
+			<pre>Extension: .edgemod
+Structure: <b id="key">ZIP</b></pre>
+			<p>Root folder contains 2 files: <code>mod.xml</code> and <code>description.txt</code>.</p>
+			<p>Description is a file for pack description.</p>
+			<p>There can be also additional folders. Their contents will be pasted to the respecive folders in EDGE folder:</p>
+			<pre>audio
+default
+effects
+fx
+images
+levels
+localization
+models
+music
+sprites
+textures</pre>
+			<div id="tag-mod">
+				<h2>Mod</h2>
+				<p>Mod is the main file for EDGE Mod. Its root tag is <b id="key">Mod</b> and its contents will be pasted into <span id="str">mapping.xml</span>.</p>
+				<p>Parameters:</p>
+				<table id="data">
+					<tr>
+						<th>Name</th>
+						<th>Required</th>
+						<th>Type</th>
+						<th>Default</th>
+						<th>Description</th>
+					</tr>
+					<tr>
+						<td>ID</td>
+						<td id="lit">Yes</td>
+						<td id="key">ID</td>
+						<td id="lit">-</td>
+						<td>ID of the mod</td>
+					</tr>
+					<tr>
+						<td>Name</td>
+						<td id="lit">Yes</td>
+						<td id="key">text</td>
+						<td id="lit"></td>
+						<td>Name of the mod</td>
+					</tr>
+					<tr>
+						<td>Version</td>
+						<td id="lit">Yes</td>
+						<td id="key">version</td>
+						<td id="lit">-</td>
+						<td>Version of the mod</td>
+					</tr>
+					<tr>
+						<td>Author</td>
+						<td id="lit">Yes</td>
+						<td id="key">text</td>
+						<td id="lit"></td>
+						<td>Author of the mod</td>
+					</tr>
+					<tr>
+						<td>Type</td>
+						<td id="lit">No</td>
+						<td id="key">special</td>
+						<td id="key">Level</td>
+						<td><span id="key">Level</span> or <span id="key">Game</span>. Defines whether the mod is a pack or a game</td>
+					</tr>
+					<tr>
+						<td>Conflicts</td>
+						<td id="lit">No</td>
+						<td id="key">ID list</td>
+						<td id="key">empty list</td>
+						<td>Specify what EDGE Mods are not allowed to be loaded with this mod</td>
+					</tr>
+					<tr>
+						<td>Dependency</td>
+						<td id="lit">No</td>
+						<td id="key">ID list</td>
+						<td id="key">empty list</td>
+						<td>Specify what EDGE Mods must be loaded to be installed</td>
+					</tr>
+					<tr>
+						<td>InstallAfter</td>
+						<td id="lit">No</td>
+						<td id="key">ID list</td>
+						<td id="key">empty list</td>
+						<td>Specify what EDGE Mods must be loaded before this mod</td>
+					</tr>
+					<tr>
+						<td>InstallBefore</td>
+						<td id="lit">No</td>
+						<td id="key">ID list</td>
+						<td id="key">empty list</td>
+						<td>Specify before what EDGE Mods this one should be installed</td>
+					</tr>
+					<tr>
+						<td>EngineVersion</td>
+						<td id="lit">No</td>
+						<td id="key">version interval</td>
+						<td id="lit">-</td>
+						<td>Define the engine version of the game for this mod to run on</td>
+					</tr>
+				</table>
+			</div>
+			<div id="sfx-fld">
+				<h2>SFX Folder</h2>
+				<p>SFX folder contains sounds for the level start screen. EDGE uses Colossus & Robotoid FL Studio voices for title sounds.</p>
+				<p>File format:</p>
+				<pre>Name: levelsfx_<span id="str">name</span>.wav</pre>
+			</div>
+		</div>
+	</div>
+
+		<button onclick="topFun();" id="upb" title="Go to the top">Up</button>
+		<script type="text/javascript">
+			ext_list = [
+				"00_Title",
+				"01_Eternity",
+				"02_Quiet",
+				"03_Pad",
+				"04_Jingle",
+				"05_Tec",
+				"06_Kakkoi",
+				"07_Dark",
+				"08_Squadron",
+				"09_8bits",
+				"10_Pixel",
+				"11_Jupiter",
+				"12_Shame",
+				"13_Debrief",
+				"14_Space",
+				"15_Voyage_geometrique",
+				"16_Mzone",
+				"17_R2",
+				"18_Mystery_cube",
+				"19_Duty",
+				"20_PerfectCell",
+				"21_fun",
+				"22_lol",
+				"23_lostway",
+				"24_wall_street"
+			];
+			java_list = [
+				"00_menus",
+				"01_braintonik",
+				"02_cube_dance",
+				"03_essai_2",
+				"04_essai_01",
+				"05_test",
+				"06_mysterycube",
+				"07_03_EDGE",
+				"08_jungle",
+				"09_RetardTonic",
+				"10_oldschool_simon",
+				"11_planant"
+			];
+			var m = document.getElementById("mark");
+
+			mark(m, "(", "sym");
+			mark(m, ")", "sym");
+			mark(m, "[", "sym");
+			mark(m, "]", "sym");
+			mark(m, "<", "sym");
+			mark(m, ">", "sym");
+			mark(m, "+", "sym");
+			mark(m, "-", "sym");
+			mark(m, "*", "sym");
+			mark(m, "/", "sym");
+			mark(m, "&", "sym");
+			mark(m, ".", "com");
+			mark(m, ":", "com");
+			mark(m, ",", "com");
+			mark(m, ";", "com");
+			mark(m, "=", "com");
+			mark(m, '"', "com");
+			mark(m, "False", "key");
+			mark(m, "True", "key");
+			mark(m, "Null", "key");
+			mark(m, "v2d", "key");
+			mark(m, "v3d", "key");
+			mark(m, "#", "lit");
+
+			document.getElementById("audio-player").loop = true;
+			var c = document.getElementById("smooth-link");
+
+			function mark(root, word, light) {
+				textNodesUnder(root).forEach(highlightWords);
+
+				function textNodesUnder(root) {
+					var n, a = [], w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+					while(n = w.nextNode()) a.push(n);
+					return a;
+				};
+
+				function highlightWords(n) {
+					for (var i; (i = n.nodeValue.indexOf(word, i)) > -1; n = after) {
+						var after = n.splitText(i + word.length);
+						var highlighted = n.splitText(i);
+						var span = document.createElement("span");
+						span.id = light;
+						span.appendChild(highlighted);
+						after.parentNode.insertBefore(span, after);
+					};
+				};
+			};
+
+			function topFun() {
+				if (c.checked) {
+					window.scrollTo({
+						top: 0,
+						left: 0,
+						behavior: "smooth"
+					});
+				} else window.scrollTo(0, 0);
+			};
+
+			function play(id, ext) {
+				var s = document.getElementById("music-player");
+				var l = document.getElementById("music-text");
+				var p = document.getElementById("audio-player");
+
+				if (ext) {
+					s.src = "music/ext/" + ext_list[id] + ".ogg";
+					s.type = "audio/ogg";
+					l.innerText = ext_list[id];
+				} else {
+					s.src = "music/java/" + java_list[id] + ".mp3";
+					s.type = "audio/mp3";
+					l.innerText = java_list[id];
+				};
+				p.load();
+				p.play();
+			};
+
+			function goto(id) {
+				var l = document.getElementById(id);
+				if (c.checked) {
+					window.scrollBy({
+						top: l.getBoundingClientRect().y - 24,
+						left: 0,
+						behavior: "smooth"
+					});
+				} else window.scrollBy(0, l.getBoundingClientRect().y - 24);
+			};
+		</script>
+	</body>
+</html>
