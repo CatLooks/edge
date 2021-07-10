@@ -123,7 +123,7 @@
 			#switch-text {
 				position: absolute;
 				left: 80px;
-				top: 628px;
+				top: 646px;
 			}
 			.switch {
 				position: relative;
@@ -215,6 +215,7 @@
 					<li><span onclick="goto('tag-mod');" id="lnk" title="Mod">Mod</span></li>
 					<li><span onclick="goto('sfx-fld');" id="lnk" title="SFX folder">SFX Folder</span></li>
 				</ul></li>
+				<li><span onclick="goto('tutorial');" id="lnk" title="Tutorial for making an EDGE level">Tutorial</span></li>
 			</ul>
 		</div>
 		<label class="switch">
@@ -1439,8 +1440,35 @@ textures</pre>
 				<pre>Name: levelsfx_<span id="str">name</span>.wav</pre>
 			</div>
 		</div>
+		<hr><div id="tutorial">
+			<h2>Tutorial</h2>
+			<p>Here's a quick tutorial for making an EDGE level.</p>
+			<h3 id="mnt">Step 1 - Setup:</h3>
+			<p>To make the level, you need to choose its size and name.</p>
+			<p>Most levels are very short in height.</p>
+			<p>Name of the level usually follows one of these patterns. Of course, you can choose your own name, however I recommend to use these patterns to avoid conflicts.</p>
+			<pre>level<span id="str">id</span>
+<span id="str">name</span>_<span id="str">id</span>
+<span id="str">author</span>_<span id="str">name</span></pre>
+			<p>You should also choose an ID of the level. Level IDs should be unique for each level.</p>
+			<h3 id="mnt">Step 2 - Terrain:</h3>
+			<p>The level consists of hitboxes and dynamic elements.</p>
+			<p>To define hitboxes and its models we use image files. All images should have the same size.</p>
+			<p>For each layer, we use multiple images: <code>name.<span id="lit">0</span>.png</code>, <code>name.<span id="lit">1</span>.png</code>, <code>name.<span id="lit">2</span>.png</code> etc.</p>
+			<p>By default, layer <span id="lit">0</span> blocks have <span id="lit">#FFFF80</span> (half block) color and other layers blocks have <span id="lit">#FFFFFF</span> (full block) color.</p>
+			<p>Standard program to use are MicroSoft Paint (on Windows) but you may try other programs or even <a href="https://github.com/CatLooks/edge/tree/main/terrain" title="GitHub repo of my terrain editor" target="_blank">my terrain editor</a> :).</p>
+			<h3 id="mnt">Step 3 - Core:</h3>
+			<p>All levels have a .xml core file. The root tag is <code>Level</code>.</p>
+			<h3 id="mnt">Step 4 - Compile:</h3>
+			<p>After you made a level, it is time for compilation.</p>
+			<p>You need to open EDGETool, select the (de)compile tab and drag the .xml file into the compilation field.</p>
+			<p>You'll receive 2 files: .bin (levels) & .eso (models) file. Each file needs to be copied to the respective folder in EDGE folder.</p>
+			<p>Then you'll need to actually add the level the game menu: you should paste the following code in the <span id="str">mapping.xml</span> <code>Level.standard / Level.bonus / Level.extended</code>:</p>
+			<pre>&lt;<span id="key">level</span> <span id="arg">filename</span>="<span id="str">level_name</span>" <span id="arg">leaderboard_id</span>="<span id="str">int_id</span>" <span id="arg">name_sfx</span>="<span id="str">sfx_sound</span>"/&gt;</pre>
+			<p>Note the <code id="str">leaderboard_id</code> and <code id="str">name_sfx</code> is optional arguments.</p>
+			<p>And the last thing, you need to run the game and play the level.</p>
+		</div>
 	</div>
-
 		<button onclick="topFun();" id="upb" title="Go to the top">Up</button>
 		<script type="text/javascript">
 			ext_list = [
