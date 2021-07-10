@@ -49,6 +49,15 @@
 				color: #D8DEE9;
 				padding: 2px;
 			}
+			footer {
+				background-color: #101010;
+				color: #F0F0F0;
+				padding-left: 32px;
+				padding-right: 32px;
+				padding-bottom: 16px;
+				padding-top: 16px;
+				display: block;
+			}
 			#key {
 				color: #EC6066;
 			}
@@ -175,6 +184,12 @@
 			}
 			.slider.round:before {
 				border-radius: 50%;
+			}
+			img.aa {
+				image-rendering: auto;
+				image-rendering: crisp-edges;
+				image-rendering: pixelated;
+				width: 72px;
 			}
 		</style>
 	</head>
@@ -1451,14 +1466,139 @@ textures</pre>
 <span id="str">name</span>_<span id="str">id</span>
 <span id="str">author</span>_<span id="str">name</span></pre>
 			<p>You should also choose an ID of the level. Level IDs should be unique for each level.</p>
+			<p>For example, I'll be using <span id="str">level104_old</span> by WEGFan.</p>
 			<h3 id="mnt">Step 2 - Terrain:</h3>
 			<p>The level consists of hitboxes and dynamic elements.</p>
 			<p>To define hitboxes and its models we use image files. All images should have the same size.</p>
 			<p>For each layer, we use multiple images: <code>name.<span id="lit">0</span>.png</code>, <code>name.<span id="lit">1</span>.png</code>, <code>name.<span id="lit">2</span>.png</code> etc.</p>
 			<p>By default, layer <span id="lit">0</span> blocks have <span id="lit">#FFFF80</span> (half block) color and other layers blocks have <span id="lit">#FFFFFF</span> (full block) color.</p>
 			<p>Standard program to use are MicroSoft Paint (on Windows) but you may try other programs or even <a href="https://github.com/CatLooks/edge/tree/main/terrain" title="GitHub repo of my terrain editor" target="_blank">my terrain editor</a> :).</p>
+			<p>Layers of <span id="str">level104_old</span>:</p>
+			<table id="data">
+				<tr>
+					<th>Layer 0</th>
+					<th>Layer 1</th>
+					<th>Layer 2</th>
+					<th>Layer 3</th>
+				</tr>
+				<tr>
+					<td><img src="level/0.png" class="aa"/></td>
+					<td><img src="level/1.png" class="aa"/></td>
+					<td><img src="level/2.png" class="aa"/></td>
+					<td><img src="level/3.png" class="aa"/></td>
+				</tr>
+			</table>
 			<h3 id="mnt">Step 3 - Core:</h3>
 			<p>All levels have a .xml core file. The root tag is <code>Level</code>.</p>
+			<p>Core of <span id="str">level104_old</span>:</p>
+			<pre>&lt;<span id="key">Level</span> <span id="arg">ID</span>="<span id="str">104</span>" <span id="arg">Size</span>="<span id="str">18x13x4</span>" <span id="arg">Name</span>="<span id="str">try again</span>" <span id="arg">TimeThresholds</span>="<span id="str">65,80,90,100,110</span>" <span id="arg">SpawnPoint</span>="<span id="str">1,3,5</span>" <span id="arg">ExitPoint</span>="<span id="str">10,10,1</span>" <span id="arg">Theme</span>="<span id="str">1</span>" <span id="arg">MusicJava</span>="<span id="str">9</span>" <span id="arg">Music</span>="<span id="str">18</span>" <span id="arg">Zoom</span>="<span id="str">1</span>"&gt;
+    &lt;<span id="key">MovingPlatform</span> <span id="arg">FullBlock</span>="False"&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">11,3,1</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">11,6,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">11,3,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>"/&gt;
+    &lt;/<span id="key">MovingPlatform</span>&gt;
+    &lt;<span id="key">MovingPlatform</span> <span id="arg">FullBlock</span>="False"&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">13,5,1</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">13,8,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">13,5,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>"/&gt;
+    &lt;/<span id="key">MovingPlatform</span>&gt;
+    &lt;<span id="key">MovingPlatform</span> <span id="arg">FullBlock</span>="False"&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">15,5,1</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">15,8,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">15,5,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>"/&gt;
+    &lt;/<span id="key">MovingPlatform</span>&gt;
+    &lt;<span id="key">MovingPlatform</span> <span id="arg">FullBlock</span>="False"&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">15,2,1</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">15,5,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">15,2,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>"/&gt;
+    &lt;/<span id="key">MovingPlatform</span>&gt;
+    &lt;<span id="key">MovingPlatform</span> <span id="arg">FullBlock</span>="False"&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">23,1,1</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">17,1,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">23,1,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>"/&gt;
+    &lt;/<span id="key">MovingPlatform</span>&gt;
+    &lt;<span id="key">MovingPlatform</span> <span id="arg">FullBlock</span>="False"&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">24,1,1</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">24,4,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">24,1,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>"/&gt;
+    &lt;/<span id="key">MovingPlatform</span>&gt;
+    &lt;<span id="key">MovingPlatform</span> <span id="arg">FullBlock</span>="False"&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">31,4,1</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">25,4,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">31,4,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>"/&gt;
+    &lt;/<span id="key">MovingPlatform</span>&gt;
+    &lt;<span id="key">MovingPlatform</span> <span id="arg">FullBlock</span>="False"&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">25,10,1</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">25,5,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">25,10,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>"/&gt;
+    &lt;/<span id="key">MovingPlatform</span>&gt;
+    &lt;<span id="key">MovingPlatform</span> <span id="arg">FullBlock</span>="False"&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">25,11,1</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">25,6,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">25,11,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>"/&gt;
+    &lt;/<span id="key">MovingPlatform</span>&gt;
+    &lt;<span id="key">MovingPlatform</span> <span id="arg">FullBlock</span>="False"&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">24,11,1</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">18,11,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">24,11,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>"/&gt;
+    &lt;/<span id="key">MovingPlatform</span>&gt;
+    &lt;<span id="key">MovingPlatform</span> <span id="arg">FullBlock</span>="False"&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">23,11,1</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">17,11,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">23,11,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>"/&gt;
+    &lt;/<span id="key">MovingPlatform</span>&gt;
+    &lt;<span id="key">MovingPlatform</span> <span id="arg">FullBlock</span>="False"&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">17,13,1</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">17,12,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">17,13,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>"/&gt;
+    &lt;/<span id="key">MovingPlatform</span>&gt;
+    &lt;<span id="key">MovingPlatform</span> <span id="arg">FullBlock</span>="False"&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">17,14,1</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">17,17,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">17,14,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>"/&gt;
+    &lt;/<span id="key">MovingPlatform</span>&gt;
+    &lt;<span id="key">MovingPlatform</span> <span id="arg">FullBlock</span>="False"&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">16,14,1</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">10,14,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">16,14,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>"/&gt;
+    &lt;/<span id="key">MovingPlatform</span>&gt;
+    &lt;<span id="key">MovingPlatform</span> <span id="arg">FullBlock</span>="False"&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">10,12,1</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">10,13,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>" <span id="arg">PauseTime</span>="<span id="str">6</span>"/&gt;
+        &lt;<span id="key">Waypoint</span> <span id="arg">Position</span>="<span id="str">10,12,1</span>" <span id="arg">TravelTime</span>="<span id="str">18</span>"/&gt;
+    &lt;/<span id="key">MovingPlatform</span>&gt;
+    
+    &lt;<span id="key">FallingPlatform</span> <span id="arg">Position</span>="<span id="str">5,11,1</span>" <span id="arg">FloatTime</span>="<span id="str">10</span>"/&gt;
+    &lt;<span id="key">FallingPlatform</span> <span id="arg">Position</span>="<span id="str">6,11,1</span>" <span id="arg">FloatTime</span>="<span id="str">10</span>"/&gt;
+    &lt;<span id="key">FallingPlatform</span> <span id="arg">Position</span>="<span id="str">6,10,1</span>" <span id="arg">FloatTime</span>="<span id="str">10</span>"/&gt;
+    &lt;<span id="key">FallingPlatform</span> <span id="arg">Position</span>="<span id="str">7,10,1</span>" <span id="arg">FloatTime</span>="<span id="str">10</span>"/&gt;
+    &lt;<span id="key">FallingPlatform</span> <span id="arg">Position</span>="<span id="str">7,12,1</span>" <span id="arg">FloatTime</span>="<span id="str">10</span>"/&gt;
+    &lt;<span id="key">FallingPlatform</span> <span id="arg">Position</span>="<span id="str">5,9,1</span>" <span id="arg">FloatTime</span>="<span id="str">10</span>"/&gt;
+    &lt;<span id="key">FallingPlatform</span> <span id="arg">Position</span>="<span id="str">3,11,1</span>" <span id="arg">FloatTime</span>="<span id="str">10</span>"/&gt;
+    &lt;<span id="key">FallingPlatform</span> <span id="arg">Position</span>="<span id="str">1,7,1</span>" <span id="arg">FloatTime</span>="<span id="str">10</span>"/&gt;
+
+    &lt;<span id="key">Checkpoint</span> <span id="arg">Position</span>="<span id="str">2,9,1</span>" <span id="arg">RespawnZ</span>="<span id="str">1</span>" <span id="arg">Radius</span>="<span id="str">0,1</span>"/&gt;
+    &lt;<span id="key">Checkpoint</span> <span id="arg">Position</span>="<span id="str">4,11,1</span>" <span id="arg">RespawnZ</span>="<span id="str">1</span>" <span id="arg">Radius</span>="<span id="str">0,2</span>"/&gt;
+    &lt;<span id="key">Checkpoint</span> <span id="arg">Position</span>="<span id="str">6,6,1</span>" <span id="arg">RespawnZ</span>="<span id="str">1</span>" <span id="arg">Radius</span>="<span id="str">0,3</span>"/&gt;
+    &lt;<span id="key">Checkpoint</span> <span id="arg">Position</span>="<span id="str">9,1,4</span>" <span id="arg">RespawnZ</span>="<span id="str">4</span>" <span id="arg">Radius</span>="<span id="str">0,4</span>"/&gt;
+    &lt;<span id="key">Checkpoint</span> <span id="arg">Position</span>="<span id="str">10,3,1</span>" <span id="arg">RespawnZ</span>="<span id="str">1</span>" <span id="arg">Radius</span>="<span id="str">0,5</span>"/&gt;
+    &lt;<span id="key">Checkpoint</span> <span id="arg">Position</span>="<span id="str">14,8,1</span>" <span id="arg">RespawnZ</span>="<span id="str">1</span>" <span id="arg">Radius</span>="<span id="str">0,6</span>"/&gt;
+    &lt;<span id="key">Checkpoint</span> <span id="arg">Position</span>="<span id="str">16,1,1</span>" <span id="arg">RespawnZ</span>="<span id="str">1</span>" <span id="arg">Radius</span>="<span id="str">0,7</span>"/&gt;
+    &lt;<span id="key">Checkpoint</span> <span id="arg">Position</span>="<span id="str">16,12,1</span>" <span id="arg">RespawnZ</span>="<span id="str">1</span>" <span id="arg">Radius</span>="<span id="str">0,8</span>"/&gt;
+
+    &lt;<span id="key">Prism</span> <span id="arg">Position</span>="<span id="str">5,10,1</span>"/&gt;
+    &lt;<span id="key">Prism</span> <span id="arg">Position</span>="<span id="str">6,12,1</span>"/&gt;
+    &lt;<span id="key">Prism</span> <span id="arg">Position</span>="<span id="str">7,11,1</span>"/&gt;
+    &lt;<span id="key">Prism</span> <span id="arg">Position</span>="<span id="str">8,3,1</span>"/&gt;
+    &lt;<span id="key">Prism</span> <span id="arg">Position</span>="<span id="str">2,11,1</span>"/&gt;
+    &lt;<span id="key">Prism</span> <span id="arg">Position</span>="<span id="str">6,1,4</span>"/&gt;
+    &lt;<span id="key">Prism</span> <span id="arg">Position</span>="<span id="str">10,1,1</span>"/&gt;
+    &lt;<span id="key">Prism</span> <span id="arg">Position</span>="<span id="str">14,8,1</span>"/&gt;
+    &lt;<span id="key">Prism</span> <span id="arg">Position</span>="<span id="str">16,5,1</span>"/&gt;
+    &lt;<span id="key">Prism</span> <span id="arg">Position</span>="<span id="str">16,11,1</span>"/&gt;
+    &lt;<span id="key">Prism</span> <span id="arg">Position</span>="<span id="str">2,7,1</span>"/&gt;
+    &lt;<span id="key">Prism</span> <span id="arg">Position</span>="<span id="str">0,7,1</span>"/&gt;
+&lt;/<span id="key">Level</span>&gt;</pre>
 			<h3 id="mnt">Step 4 - Compile:</h3>
 			<p>After you made a level, it is time for compilation.</p>
 			<p>You need to open EDGETool, select the (de)compile tab and drag the .xml file into the compilation field.</p>
@@ -1467,8 +1607,14 @@ textures</pre>
 			<pre>&lt;<span id="key">level</span> <span id="arg">filename</span>="<span id="str">level_name</span>" <span id="arg">leaderboard_id</span>="<span id="str">int_id</span>" <span id="arg">name_sfx</span>="<span id="str">sfx_sound</span>"/&gt;</pre>
 			<p>Note the <code id="str">leaderboard_id</code> and <code id="str">name_sfx</code> is optional arguments.</p>
 			<p>And the last thing, you need to run the game and play the level.</p>
+			<img src="level/p.png" style="width:450px;"/>
 		</div>
 	</div>
+	<footer>
+		<p>Web-site made by <a href="https://www.youtube.com/channel/UC4s_PS92igAmSKjVgbrsleg" title="My YT Page" target="_blank">CatLooks</a></p>
+		<p><a href="https://store.steampowered.com/app/38740/EDGE" title="EDGE Steam Page" target="_blank">EDGE</a>, <a href="https://edgefans.mygod.be" title="EDGETool Web-site" target="_blank">EDGETool</a></p>
+		<p>Quack 🦆🦆🦆 :)</p>
+	</footer>
 		<button onclick="topFun();" id="upb" title="Go to the top">Up</button>
 		<script type="text/javascript">
 			ext_list = [
@@ -1530,7 +1676,7 @@ textures</pre>
 			mark(m, ",", "com");
 			mark(m, ";", "com");
 			mark(m, "=", "com");
-			mark(m, '"', "com");
+			mark(m, '"', "sym");
 			mark(m, "False", "key");
 			mark(m, "True", "key");
 			mark(m, "Null", "key");
